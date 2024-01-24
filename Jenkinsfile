@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                //
-            }
+# Install NPM dependencies
+npm install            }
         }
         // stage('Test') {
         //     steps {

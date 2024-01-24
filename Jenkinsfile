@@ -3,10 +3,15 @@ pipeline {
     stages {
       stage('clone repo') {
           steps {
-              git clone https://github.com/aakashsehgal/FMU.git 
-
+# Get the latest snapshot
+git clone https://github.com/sahat/hackathon-starter.git myproject
+    
+# Change directory
+cd myproject
           }
+    stage('Build') {
+        
+    }
          }
       }
     }
-}

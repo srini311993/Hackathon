@@ -3,14 +3,15 @@ pipeline {
     stages {
       stage('clone repo') {
           steps {
-# Get the latest snapshot
-git clone https://github.com/sahat/hackathon-starter.git myproject
+            # Get the latest snapshot
+            git clone https://github.com//hackathon-starter.git myproject
     
-# Change directory
-cd myproject
+            # Change directory
+            cd myproject
           }
-    stage('Build') {
-        
+     stage('Build') {
+        # Install NPM dependencies
+        npm install
     }
          }
       }

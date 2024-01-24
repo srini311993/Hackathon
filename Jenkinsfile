@@ -4,7 +4,7 @@ pipeline {
       stage('clone repo') {
           steps {
             # Get the latest snapshot
-            git clone https://github.com//hackathon-starter.git myproject
+            git clone https://github.com/srini311993/Hackathon.git myproject
     
             # Change directory
             cd myproject

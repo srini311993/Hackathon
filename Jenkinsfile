@@ -50,23 +50,23 @@ dockerImage = ''
             }
             }
       }
-    stage('Scan Docker Image') {
-      steps {
-        sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${WORKSPACE}/trivy-cache:/root/.cache/ aquasec/trivy --exit-code 0 --severity LOW,MEDIUM nodejs:$BUILD_NUMBER'
-        sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${WORKSPACE}/trivy-cache:/root/.cache/ aquasec/trivy --exit-code 1 --severity HIGH,CRITICAL nodejs:$BUILD_NUMBER'
-      }
-    }
+    // stage('Scan Docker Image') {
+    //   steps {
+    //     sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${WORKSPACE}/trivy-cache:/root/.cache/ aquasec/trivy --exit-code 0 --severity LOW,MEDIUM nodejs:$BUILD_NUMBER'
+    //     sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${WORKSPACE}/trivy-cache:/root/.cache/ aquasec/trivy --exit-code 1 --severity HIGH,CRITICAL nodejs:$BUILD_NUMBER'
+    //   }
+    // }
 
-      //  stage('Vulnerability Scan - Docker Trivy') {
-      //    steps {
-      //      script{
-      //        withCredentials([string(credentialsId: 'TRIVY_GITHUB_TOKEN', variable: 'TOKEN')]) {
-      //        sh "sed -i 's#token_github#${TOKEN}#g' trivy-image-scan.sh"      
-      //        sh "sudo bash trivy-image-scan.sh"
-      //   }
-      //  }
-      // }
-      //  }
+       stage('Vulnerability Scan - Docker Trivy') {
+         steps {
+           script{
+             withCredentials([string(credentialsId: 'TRIVY_GITHUB_TOKEN', variable: 'TOKEN')]) {
+             sh "sed -i 's#token_github#${TOKEN}#g' trivy-image-scan.sh"      
+             sh "sudo bash trivy-image-scan.sh"
+        }
+       }
+      }
+       }
      stage('Docker Push') {
       steps{
         script {

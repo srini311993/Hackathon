@@ -17,10 +17,12 @@ pipeline {
     
     stage('Docker Build'){
        steps {
-        def dockerHome = tool 'myDocker'
-        // env.PATH = "${dockerHome}/bin:${env.PATH}"
-        sh 'docker build -t node/nodejs:latest .'
+         script {
+            def dockerHome = tool 'myDocker'
+            // env.PATH = "${dockerHome}/bin:${env.PATH}"
+            sh 'docker build -t node/nodejs:latest .'
             }
             }
+    }
       }
 }

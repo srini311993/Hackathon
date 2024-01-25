@@ -15,7 +15,9 @@ pipeline {
       }
     }
     stage('Docker image'){
+       steps {
         sh 'docker build -t node/nodejs:latest .'
             }
             }
       }
+}

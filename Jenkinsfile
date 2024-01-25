@@ -60,7 +60,7 @@ dockerImage = ''
        stage('Vulnerability Scan - Docker Trivy') {
          steps {
            script{
-             withCredentials([string(credentialsId: 'trivy_github_token', variable: 'TOKEN')]) {
+             withCredentials([string(credentialsId: 'TRIVY_GITHUB_TOKEN', variable: 'TOKEN')]) {
              sh "sed -i 's#token_github#${TOKEN}#g' trivy-image-scan.sh"      
              sh "sudo bash trivy-image-scan.sh"
         }

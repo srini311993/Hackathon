@@ -4,7 +4,7 @@ dockerImageName=$(awk 'NR==1 {print $2}' Dockerfile)
 echo $dockerImageName
 
 #-e TRIVY_GITHUB_TOKEN=$token: Sets an environment variable TRIVY_GITHUB_TOKEN with the provided token value. This is used to access private GitHub repositories during vulnerability scanning.
-docker run --rm -v $WORKSPACE:/root/.cache/  -e TRIVY_GITHUB_TOKEN='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' aquasec/trivy:0.17.2 -q image --exit-code 1 --severity CRITICAL --light $dockerImageName
+docker run --rm -v $WORKSPACE:/root/.cache/  -e TRIVY_GITHUB_TOKEN='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' aquasec/trivy:0.17.2 -q image --exit-code 1 --severity CRITICAL --light $dockerImageName
 
     # Trivy scan result processing
     exit_code=$?

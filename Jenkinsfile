@@ -50,30 +50,11 @@ dockerImage = ''
             }
             }
       }
-    // stage("Trivy Scan") {
-    //   steps {
-    //     script {
-    //       sh 'sudo curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin'
-    //       sh 'trivy image --light --no-progress --format template --template "@//html.tpl" -o //workspace/$JOB_NAME/trivyscan.html dockerImage'
-    //       publishHTML([ allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '//workspace/$JOB_NAME', reportFiles: 'trivyscan.html', reportName: 'TRIVY Scan Report', reportTitles: ''])
-    //       }
-    //       }
-    //       }
         stage('Scan Docker Image') {
           steps {
-            sh 'trivy image srinisdockerepo/nodejs:$BUILD_NUMBER'
+            sh 'trivy --no-progress --exit-code 1 --severity MEDIUM, HIGH, CRITICAL image srinisdockerepo/nodejs:$BUILD_NUMBER'
           }
         }
-      //  stage('Vulnerability Scan - Docker Trivy') {
-      //    steps {
-      //      script{
-      //        withCredentials([string(credentialsId: 'TRIVY_GITHUB_TOKEN', variable: 'TOKEN')]) {
-      //        sh "sed -i 's#token_github#${TOKEN}#g' trivy-image-scan.sh"      
-      //        sh "sudo bash trivy-image-scan.sh"
-      //   }
-      //  }
-      // }
-      //  }
      stage('Docker Push') {
       steps{
         script {

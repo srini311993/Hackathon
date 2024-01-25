@@ -62,7 +62,7 @@ dockerImage = ''
            script{
              withCredentials([string(credentialsId: 'TRIVY_GITHUB_TOKEN', variable: 'TOKEN')]) {
              sh "sed -i 's#token_github#${TOKEN}#g' trivy-image-scan.sh"      
-             sh "trivy-image-scan.sh"
+             sh "sudo bash trivy-image-scan.sh"
         }
        }
       }

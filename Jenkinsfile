@@ -1,6 +1,6 @@
 pipeline {
 environment {
-registry = "https://hub.docker.com/srinisdockerepo"
+registry = "https://hub.docker.com/repository/docker/srinisdockerepo"
 registryCredential = 'dockerHub'
 dockerImage = ''
 }

@@ -30,7 +30,7 @@ dockerImage = ''
             }
     }
      stage('Docker Push') {
-    	agent any
+      agent any
       steps{
       script {
       docker.withRegistry( '', registryCredential ) {

@@ -61,7 +61,7 @@ dockerImage = ''
     //       }
         stage('Scan Docker Image') {
           steps {
-            sh 'trivy nodejs:$BUILD_NUMBER'
+            sh 'trivy image dockerImage'
           }
         }
       //  stage('Vulnerability Scan - Docker Trivy') {

@@ -13,6 +13,9 @@ pipeline {
       steps {
         sh 'npm install -g nodemon'
       }
-    }  
-  }
-}
+    }
+    stage('Docker image'){
+        sh 'docker build -t node/nodejs:latest .'
+            }
+            }
+      }

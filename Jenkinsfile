@@ -25,7 +25,7 @@ dockerImage = ''
          script {
             // def dockerHome = tool 'myDocker'
             // env.PATH = "${dockerHome}/bin:${env.PATH}"
-            dockerImage = docker.build registry + ":$BUILD_NUMBER"
+            dockerImage = docker.build registry + "nodejs:$BUILD_NUMBER"
             }
             }
       }

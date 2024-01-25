@@ -1,6 +1,6 @@
 pipeline {
 environment {
-registry = "https://hub.docker.com/repositories/srinisdockerepo"
+registry = "https://hub.docker.com/repositories"
 registryCredential = 'dockerHub'
 dockerImage = ''
 }
@@ -28,13 +28,12 @@ dockerImage = ''
             dockerImage = docker.build registry + ":$BUILD_NUMBER"
             }
             }
-    }
+      }
      stage('Docker Push') {
-      agent any
       steps{
-      script {
-      docker.withRegistry( '', registryCredential ) {
-      dockerImage.push()
+        script {
+          docker.withRegistry( '', registryCredential ) {
+          dockerImage.push()
     }
     }
     }

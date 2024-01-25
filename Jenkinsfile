@@ -15,6 +15,7 @@ pipeline {
       }
     }
     stage('Docker image'){
+    tools {Docker 'latest'}
        steps {
         sh 'docker build -t node/nodejs:latest .'
             }

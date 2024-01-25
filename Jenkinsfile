@@ -66,6 +66,7 @@ dockerImage = ''
         }
        }
       }
+       }
      stage('Docker Push') {
       steps{
         script {

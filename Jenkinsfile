@@ -19,7 +19,16 @@ dockerImage = ''
         sh 'npm install -g nodemon'
       }
     }
-    
+    stage('SonarQube Analysis') {
+      steps{
+        script{
+          def scannerHome = tool 'sonarscanner';
+          withSonarQubeEnv() {
+          sh "${scannerHome}/bin/sonar-scanner"
+      }
+      }
+    }
+  }
     stage('Docker Build'){
        steps {
          script {

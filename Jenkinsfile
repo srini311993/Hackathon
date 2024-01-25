@@ -50,12 +50,15 @@ dockerImage = ''
             }
             }
       }
-    stage('Scan Docker Image') {
+    stage("Trivy Scan") {
       steps {
-        sh 'trivy nodejs:$BUILD_NUMBER'
-      }
-    }
-
+        script {
+          sh 'sudo curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin'
+          sh 'trivy image --light --no-progress --format template --template "@//html.tpl" -o //workspace/$JOB_NAME/trivyscan.html dockerImage'
+          publishHTML([ allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '//workspace/$JOB_NAME', reportFiles: 'trivyscan.html', reportName: 'TRIVY Scan Report', reportTitles: ''])
+          }
+          }
+          }
       //  stage('Vulnerability Scan - Docker Trivy') {
       //    steps {
       //      script{

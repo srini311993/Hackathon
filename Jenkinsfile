@@ -23,8 +23,8 @@ dockerImage = ''
     stage('Docker Build'){
        steps {
          script {
-            def dockerHome = tool 'myDocker'
-            env.PATH = "${dockerHome}/bin:${env.PATH}"
+            // def dockerHome = tool 'myDocker'
+            // env.PATH = "${dockerHome}/bin:${env.PATH}"
             dockerImage = docker.build registry + ":$BUILD_NUMBER"
             }
             }

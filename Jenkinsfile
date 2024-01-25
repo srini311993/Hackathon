@@ -38,6 +38,7 @@ dockerImage = ''
                     } 
                 }
   }
+    }
     stage('Docker Build'){
        steps {
          script {

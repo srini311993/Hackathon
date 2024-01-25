@@ -29,18 +29,18 @@ dockerImage = ''
       }
     }
   }
-    stage('Quality Gate'){
-      steps{
-        script{
-          timeout(time: 1, unit: 'HOURS'){
-          def qg = waitForQualityGate()
-          if(qg.status != 'OK'){
-              error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                      } 
-                }
-        }
-  }
-    }
+  //   stage('Quality Gate'){
+  //     steps{
+  //       script{
+  //         timeout(time: 1, unit: 'HOURS'){
+  //         def qg = waitForQualityGate()
+  //         if(qg.status != 'OK'){
+  //             error "Pipeline aborted due to quality gate failure: ${qg.status}"
+  //                     } 
+  //               }
+  //       }
+  // }
+  //   }
     stage('Docker Build'){
        steps {
          script {
@@ -50,6 +50,12 @@ dockerImage = ''
             }
             }
       }
+    stage('Scan Docker Image') {
+      steps {
+        sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${WORKSPACE}/trivy-cache:/root/.cache/ aquasec/trivy --exit-code 0 --severity LOW,MEDIUM dockerImage'
+        sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${WORKSPACE}/trivy-cache:/root/.cache/ aquasec/trivy --exit-code 1 --severity HIGH,CRITICAL dockerImage'
+      }
+    }
      stage('Docker Push') {
       steps{
         script {

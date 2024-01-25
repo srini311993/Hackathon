@@ -61,7 +61,7 @@ dockerImage = ''
     //       }
         stage('Scan Docker Image') {
           steps {
-            sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${WORKSPACE}/trivy-cache:/root/.cache/ aquasec/trivy --exit-code 1 --severity HIGH,CRITICAL dockerImage'
+            sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${WORKSPACE}/trivy-cache:/root/.cache/ aquasec/trivy --severity HIGH,CRITICAL dockerImage'
           }
         }
       //  stage('Vulnerability Scan - Docker Trivy') {

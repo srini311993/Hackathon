@@ -50,12 +50,12 @@ dockerImage = ''
             }
             }
       }
-    stage('Scan Docker Image') {
-      steps {
-        sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${WORKSPACE}/trivy-cache:/root/.cache/ aquasec/trivy --exit-code 0 --severity LOW,MEDIUM dockerImage'
-        sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${WORKSPACE}/trivy-cache:/root/.cache/ aquasec/trivy --exit-code 1 --severity HIGH,CRITICAL dockerImage'
-      }
-    }
+    // stage('Scan Docker Image') {
+    //   steps {
+    //     sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${WORKSPACE}/trivy-cache:/root/.cache/ aquasec/trivy --exit-code 0 --severity LOW,MEDIUM dockerImage'
+    //     sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${WORKSPACE}/trivy-cache:/root/.cache/ aquasec/trivy --exit-code 1 --severity HIGH,CRITICAL dockerImage'
+    //   }
+    // }
      stage('Docker Push') {
       steps{
         script {

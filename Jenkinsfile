@@ -29,7 +29,7 @@ dockerImage = ''
       }
     }
   }
-    stage('quality gate'){
+    stage('Quality Gate'){
       steps{
         script{
           timeout(time: 1, unit: 'HOURS'){

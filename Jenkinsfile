@@ -38,6 +38,7 @@ dockerImage = ''
               error "Pipeline aborted due to quality gate failure: ${qg.status}"
                       } 
                 }
+        }
   }
     }
     stage('Docker Build'){

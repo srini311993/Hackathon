@@ -52,7 +52,7 @@ dockerImage = ''
       }
         stage('Scan Docker Image') {
           steps {
-            sh 'trivy image --exit-code 1 --severity HIGH,CRITICAL srinisdockerepo/nodejs:$BUILD_NUMBER'
+            sh 'trivy image --no-process --exit-code 1 --severity HIGH,CRITICAL srinisdockerepo/nodejs:$BUILD_NUMBER'
           }
         }
      stage('Docker Push') {

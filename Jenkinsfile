@@ -40,7 +40,7 @@ dockerImage = ''
       }
     stage('Cleaning up') {
       steps{
-        sh "docker rmi $registry:nodejs/$BUILD_NUMBER"
+        sh "docker rmi $registry/nodejs:$BUILD_NUMBER"
 }
 }
     }

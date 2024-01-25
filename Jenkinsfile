@@ -1,4 +1,9 @@
 pipeline {
+environment {
+registry = "https://hub.docker.com/repositories/srinisdockerepo"
+registryCredential = 'dockerHub'
+dockerImage = ''
+}
   agent any
   tools {nodejs 'nodejs'}
   stages {
@@ -20,17 +25,19 @@ pipeline {
          script {
             def dockerHome = tool 'myDocker'
             env.PATH = "${dockerHome}/bin:${env.PATH}"
-            sh 'docker build -t srinisdockerepo/nodejs:${env.BUILD_ID} .'
+            dockerImage = docker.build registry + ":$BUILD_NUMBER"
             }
             }
     }
      stage('Docker Push') {
     	agent any
-      steps {
-      	withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-        	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push srinisdockerepo/nodejs:${env.BUILD_ID}'
-        }
+      steps{
+      script {
+      docker.withRegistry( '', registryCredential ) {
+      dockerImage.push()
+    }
+    }
+    }
       }
     }
     

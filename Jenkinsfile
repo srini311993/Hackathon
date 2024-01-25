@@ -20,7 +20,7 @@ pipeline {
          script {
             def dockerHome = tool 'myDocker'
             env.PATH = "${dockerHome}/bin:${env.PATH}"
-            sh 'docker build -t srinisdockerepo/nodejs:latest1 .'
+            sh 'docker build -t srinisdockerepo/nodejs:${env.BUILD_ID} .'
             }
             }
     }
@@ -29,7 +29,7 @@ pipeline {
       steps {
       	withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
         	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push srinisdockerepo/nodejs:latest1'
+          sh 'docker push srinisdockerepo/nodejs:${env.BUILD_ID}'
         }
       }
     }

@@ -50,15 +50,20 @@ dockerImage = ''
             }
             }
       }
-    stage("Trivy Scan") {
-      steps {
-        script {
-          sh 'sudo curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin'
-          sh 'trivy image --light --no-progress --format template --template "@//html.tpl" -o //workspace/$JOB_NAME/trivyscan.html dockerImage'
-          publishHTML([ allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '//workspace/$JOB_NAME', reportFiles: 'trivyscan.html', reportName: 'TRIVY Scan Report', reportTitles: ''])
+    // stage("Trivy Scan") {
+    //   steps {
+    //     script {
+    //       sh 'sudo curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin'
+    //       sh 'trivy image --light --no-progress --format template --template "@//html.tpl" -o //workspace/$JOB_NAME/trivyscan.html dockerImage'
+    //       publishHTML([ allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '//workspace/$JOB_NAME', reportFiles: 'trivyscan.html', reportName: 'TRIVY Scan Report', reportTitles: ''])
+    //       }
+    //       }
+    //       }
+        stage('Scan Docker Image') {
+          steps {
+            sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${WORKSPACE}/trivy-cache:/root/.cache/ aquasec/trivy --exit-code 1 --severity HIGH,CRITICAL dockerImage'
           }
-          }
-          }
+        }
       //  stage('Vulnerability Scan - Docker Trivy') {
       //    steps {
       //      script{

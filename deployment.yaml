@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: node-web
-        image: srinisdockerepo/nodejs:59
+        image: srinisdockerepo/nodejs:61
         ports:
         - containerPort: 3000
 

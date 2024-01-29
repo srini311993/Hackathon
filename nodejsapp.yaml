@@ -22,16 +22,16 @@ spec:
         ports:
           - containerPort: 3000
 ---
-apiVersion: v1 # Kubernetes API version
-kind: Service # Kubernetes resource kind we are creating
-metadata: # Metadata of the resource kind we are creating
+apiVersion: v1
+kind: Service
+metadata:
   name: nodejs-app
+  namespace: default
 spec:
   selector:
-    app: nodejs-webapp
-    namespace: default
+    app: nodejs-app
+  type: LoadBalancer
   ports:
-    - protocol: "TCP"
-      port: 3000 # The port that the service is running on in the cluster
-      targetPort: 3000 # The port exposed by the service
-  type: NodePort # type of the service.
+  - name: http
+    targetPort: 3000
+    port: 80

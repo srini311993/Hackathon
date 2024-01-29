@@ -67,7 +67,9 @@ dockerImage = ''
     stage('Deploy to k8s'){
             steps{
                 script{
-                    kubernetesDeploy (configs: 'deploymentservice.yaml', kubeconfigId: 'kubernetes_connect')
+                  sh ('aws eks update-kubeconfig --name Hackthon-eks-cluster --region us-east-1')
+                  sh "kubectl get ns"
+                  sh "kubectl apply -f nodejsapp.yaml"
                 }
             }
         }

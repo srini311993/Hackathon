@@ -64,6 +64,13 @@ dockerImage = ''
     }
     }
       }
+    stage('Deploy to k8s'){
+            steps{
+                script{
+                    kubernetesDeploy (configs: 'deploymentservice.yaml', kubeconfigId: 'kubernetes_connect')
+                }
+            }
+        }
     stage('Cleaning up') {
       steps{
         sh "docker rmi $registry/nodejs:$BUILD_NUMBER"

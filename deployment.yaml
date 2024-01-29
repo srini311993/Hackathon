@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: node-web
-        image: srinisdockerepo/nodejs:61
+        image: docker.io/srinisdockerepo/nodejs:62
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
 

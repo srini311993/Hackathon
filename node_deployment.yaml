@@ -17,4 +17,4 @@ spec:
         image: docker.io/srinisdockerepo/nodejs:67
         imagePullPolicy: Always
         ports:
-          - containerPort: 3000
+          - containerPort: 8080

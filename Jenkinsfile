@@ -67,9 +67,9 @@ dockerImage = ''
     stage('Deploy to k8s'){
             steps{
                 script{
-                  sh ('aws eks update-kubeconfig --name dev-cluster --region us-east-1')
+                  sh ('aws eks update-kubeconfig --name webapp-nodejs-cluster --region us-east-1')
                   sh "kubectl get ns"
-                  sh "kubectl apply -f deployment.yaml"
+                  sh "kubectl apply -f node_deployment.yaml"
                 }
             }
         }

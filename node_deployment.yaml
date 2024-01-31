@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapp-nodejs
+  name: nodejs-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: webapp-nodejs
+      app: nodejs-app
   template:
     metadata:
       labels:
-        app: webapp-nodejs
+        app: nodejs-app
     spec:
       containers:
-      - name: webapp-nodejs
-        image: srinisdockerepo/webapp-nodejs:latest
+      - name: nodejs-app
+        image: srinisdockerepo/nodejs:9
         imagePullPolicy: Always
         ports:
-          - containerPort: 3000
+          - containerPort: 8080

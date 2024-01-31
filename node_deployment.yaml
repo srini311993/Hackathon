@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: webapp-nodejs
-        image: docker.io/srinisdockerepo/nodejs:6
+        image: docker.io/srinisdockerepo/webapp-nodejs:latest
         imagePullPolicy: Always
         ports:
-          - containerPort: 8080
+          - containerPort: 3000

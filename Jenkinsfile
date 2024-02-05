@@ -64,6 +64,25 @@ dockerImage = ''
     }
     }
       }
+        stage('Update Deployment File') {
+        environment {
+            GIT_REPO_NAME = "Hackathon"
+            GIT_USER_NAME = "srini311993"
+        }
+        steps {
+            withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                sh '''
+                    git config user.email "srinivasarao.surla@yahoo.com"
+                    git config user.name "Srini"
+                    BUILD_NUMBER=${BUILD_NUMBER}
+                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" node_deployment.yml
+                    git add node_deployment.yml
+                    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
+                '''
+            }
+        }
+    }
     stage('Deploy to k8s'){
             steps{
                 script{

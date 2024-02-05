@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: nodejs-app
-        image: srinisdockerepo/nodejs:30
+        image: srinisdockerepo/nodejs:replaceImageTag
         imagePullPolicy: Always
         ports:
           - containerPort: 8080

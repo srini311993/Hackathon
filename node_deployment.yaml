@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: nodejs-app
-        image: srinisdockerepo/nodejs:12
+        image: srinisdockerepo/nodejs:16
         imagePullPolicy: Always
         ports:
           - containerPort: 8080
@@ -31,7 +31,6 @@ spec:
     app: nodejs-app
   type: LoadBalancer
   ports:
-  - name: http
-    protocol: TCP
+  - protocol: TCP
     targetPort: 8080
     port: 80
